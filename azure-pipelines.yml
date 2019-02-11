@@ -13,8 +13,8 @@ jobs:
       vmImage: ubuntu-16.04
     container: ubuntu:16.04
     steps:
-      - script: sudo apt update
-      - script: sudo apt install libfontconfig1-dev -y
+      - script: apt update
+      - script: apt install libfontconfig1-dev -y
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
   - job: macos
