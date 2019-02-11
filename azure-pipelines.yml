@@ -13,8 +13,11 @@ jobs:
       vmImage: ubuntu-16.04
     container: ubuntu:16.04
     steps:
-      - script: apt update
-      - script: apt install libfontconfig1-dev -y
+      - bash: |
+          sudo apt update
+          sudo apt install -y apt-transport-https
+          sudo apt update
+          sudo apt install -y libfontconfig1-dev dotnet-sdk-2.2
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
   - job: macos
