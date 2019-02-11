@@ -10,7 +10,6 @@ using SkiaSharp;
 
 namespace SkiaSharpBenchmarks
 {
-	[RPlotExporter, RankColumn]
 	public class DrawImage
 	{
 		private Image systemImage;
@@ -33,7 +32,7 @@ namespace SkiaSharpBenchmarks
 		}
 
 		[Benchmark(Baseline = true, Description = "System.Drawing Draw Image")]
-		public void DrawPathWithSystemDrawing()
+		public void DrawImageWithSystemDrawing()
 		{
 			using (var destination = new Bitmap(CanvasSize, CanvasSize))
 			using (var graphics = Graphics.FromImage(destination))
@@ -44,15 +43,12 @@ namespace SkiaSharpBenchmarks
 				var r = new RectangleF(0, 0, systemImage.Width * Scale, systemImage.Height * Scale);
 				graphics.DrawImage(systemImage, r);
 
-				using (var ms = new MemoryStream())
-				{
-					destination.Save(ms, ImageFormat.Png);
-				}
+				graphics.Flush();
 			}
 		}
 
 		[Benchmark(Description = "SkiaSharp Draw Image")]
-		public void DrawPathWithSkiaSharp()
+		public void DrawImageWithSkiaSharp()
 		{
 			using (var surface = SKSurface.Create(new SKImageInfo(CanvasSize, CanvasSize)))
 			{
@@ -61,15 +57,13 @@ namespace SkiaSharpBenchmarks
 				var paint = new SKPaint
 				{
 					IsAntialias = true,
+					FilterQuality = SKFilterQuality.High
 				};
 
 				var r = new SKRect(0, 0, skiaImage.Width * Scale, skiaImage.Height * Scale);
 				canvas.DrawImage(skiaImage, r);
 
-				using (var ms = new MemoryStream())
-				{
-					surface.Snapshot().Encode(SKEncodedImageFormat.Png, 100).SaveTo(ms);
-				}
+				canvas.Flush();
 			}
 		}
 	}

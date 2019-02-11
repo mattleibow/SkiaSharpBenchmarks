@@ -10,7 +10,6 @@ using SkiaSharp;
 
 namespace SkiaSharpBenchmarks
 {
-	[RPlotExporter, RankColumn]
 	public class DrawLines
 	{
 		private PointF[] systemPoints;
@@ -55,10 +54,7 @@ namespace SkiaSharpBenchmarks
 
 				graphics.DrawPath(pen, path);
 
-				using (var ms = new MemoryStream())
-				{
-					destination.Save(ms, ImageFormat.Png);
-				}
+				graphics.Flush();
 			}
 		}
 
@@ -82,10 +78,7 @@ namespace SkiaSharpBenchmarks
 
 				canvas.DrawPath(path, paint);
 
-				using (var ms = new MemoryStream())
-				{
-					surface.Snapshot().Encode(SKEncodedImageFormat.Png, 100).SaveTo(ms);
-				}
+				canvas.Flush();
 			}
 		}
 	}
