@@ -14,9 +14,11 @@ pool:
   vmImage: $(imageName)
 
 steps:
+  - powershell: 'Get-ChildItem Env:'
+  - script: sudo apt install libfontconfig1-dev -y
+    condition: eq('$(Agent.JobName)', 'linux')
   - script: dotnet run -c Release -p SkiaSharpBenchmarks
   - task: PublishPipelineArtifact@0
     inputs:
-      artifactName: results
-      targetPath: '*/BenchmarkDotNet.Artifacts/'
-
+      artifactName: '$(Agent.JobName)_results'
+      targetPath: 'SkiaSharpBenchmarks/BenchmarkDotNet.Artifacts/'
