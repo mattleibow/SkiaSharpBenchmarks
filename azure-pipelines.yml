@@ -8,10 +8,10 @@ jobs:
     steps:
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
-  - job: ubuntu14
+  - job: ubuntu16
     pool:
       vmImage: ubuntu-16.04
-    container: ubuntu:14.04
+    container: ubuntu:16.04
     steps:
       - bash: |
           sudo apt update
