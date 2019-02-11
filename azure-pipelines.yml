@@ -2,21 +2,22 @@ trigger:
   - master
 
 jobs:
-  - job: Windows
+  - job: windows
     pool:
       vmImage: vs2017-win2016
     steps:
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
-  - job: Ubuntu_16
+  - job: ubuntu16
     pool:
       vmImage: ubuntu-16.04
     container: ubuntu:16.04
     steps:
+      - script: sudo apt update
       - script: sudo apt install libfontconfig1-dev -y
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
-  - job: macOS
+  - job: macos
     pool:
       vmImage: macos-10.13
     steps:
