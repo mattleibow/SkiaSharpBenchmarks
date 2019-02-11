@@ -15,7 +15,7 @@ pool:
 
 steps:
   - script: sudo apt install libfontconfig1-dev -y
-    condition: eq('$(Agent.JobName)', 'linux')
+    condition: eq(variables['Agent.OS'], 'Linux')
   - script: dotnet run -c Release -p SkiaSharpBenchmarks
   - task: PublishPipelineArtifact@0
     inputs:
