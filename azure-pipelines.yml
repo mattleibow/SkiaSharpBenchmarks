@@ -8,7 +8,7 @@ jobs:
     steps:
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
-  - job: Ubuntu 16
+  - job: Ubuntu_16
     pool:
       vmImage: ubuntu-16.04
     container: ubuntu:16.04
