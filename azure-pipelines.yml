@@ -14,7 +14,7 @@ pool:
   vmImage: $(imageName)
 
 steps:
-  - script: dotnet run -c Release
+  - script: dotnet run -c Release -p SkiaSharpBenchmarks
   - task: PublishPipelineArtifact@0
     inputs:
       artifactName: results
