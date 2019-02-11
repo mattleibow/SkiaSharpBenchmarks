@@ -15,9 +15,8 @@ jobs:
     steps:
       - bash: |
           apt-get update
-          # apt-get -y install sudo
-          # apt-get update
-          # apt-get install -y apt-transport-https libfontconfig1-dev dotnet-sdk-2.2
+          apt-get install -y libfontconfig1-dev dotnet-sdk-2.2
+        privileged: true
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
 
   - job: macos
