@@ -15,3 +15,8 @@ pool:
 
 steps:
   - script: dotnet run -c Release
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: results
+      targetPath: '*/BenchmarkDotNet.Artifacts/'
+
