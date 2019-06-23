@@ -3,33 +3,17 @@ trigger:
   - master
 
 jobs:
-  - job: windows
-    pool:
-      vmImage: vs2017-win2016
-    steps:
-      - script: dotnet run -c Release -p SkiaSharpBenchmarks
-      - task: PublishPipelineArtifact@0
-        inputs:
-          artifactName: 'windows_results'
-          targetPath: 'BenchmarkDotNet.Artifacts/'
-
-  - job: ubuntu16
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - script: dotnet run -c Release -p SkiaSharpBenchmarks
-      - task: PublishPipelineArtifact@0
-        inputs:
-          artifactName: 'ubuntu16_results'
-          targetPath: 'BenchmarkDotNet.Artifacts/'
-
-  - job: macos
+  - job: old_library
     pool:
       vmImage: macos-10.13
     steps:
-      - script: brew install mono-libgdiplus
       - script: dotnet run -c Release -p SkiaSharpBenchmarks
-      - task: PublishPipelineArtifact@0
-        inputs:
-          artifactName: 'macos_results'
-          targetPath: 'BenchmarkDotNet.Artifacts/'
+        env:
+          LIBRARY_VERSION: 'old'
+  - job: new_library
+    pool:
+      vmImage: macos-10.13
+    steps:
+      - script: dotnet run -c Release -p SkiaSharpBenchmarks
+        env:
+          LIBRARY_VERSION: 'new'
