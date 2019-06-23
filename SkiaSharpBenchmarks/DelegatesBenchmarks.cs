@@ -12,7 +12,7 @@ namespace SkiaSharpBenchmarks
 		private IntPtr memory;
 		private SKData[] array;
 
-		[Params(1, 10, 100, 1_000, 1_000_000)]
+		[Params(1, 10, 100, 1_000)]
 		public int N;
 
 		[GlobalSetup]
