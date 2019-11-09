@@ -13,4 +13,9 @@ pool:
   name: $(imageName)
 
 steps:
+  - bash: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_4_0
+    condition: eq(variables['System.JobName'], 'macos')
+  - task: UseDotNet@2
+    inputs:
+      version: 3.0.x
   - script: dotnet run -c Release -p SkiaSharpBenchmarks
