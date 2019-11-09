@@ -16,3 +16,8 @@ steps:
       configuration: 'Release'
       msbuildArguments: '/restore'
   - script: SkiaSharpBenchmarks\bin\Release\netcoreapp3.0\SkiaSharpBenchmarks.exe
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: 'BenchmarkDotNet.Artifacts'
+      artifactName: 'BenchmarkDotNet.Artifacts'
+      publishLocation: 'Container'
