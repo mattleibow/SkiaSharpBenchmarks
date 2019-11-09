@@ -2,24 +2,24 @@
 trigger:
   - master
 
-pool:
-  name: Hosted Windows 2019 with VS2019
-
-timeoutInMinutes: 120
-
-steps:
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '3.0.x'
-  - task: MSBuild@1
-    inputs:
-      solution: 'SkiaSharpBenchmarks.sln'
-      configuration: 'Release'
-      msbuildArguments: '/restore'
-  - script: SkiaSharpBenchmarks\bin\Release\netcoreapp3.0\SkiaSharpBenchmarks.exe
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: 'BenchmarkDotNet.Artifacts'
-      artifactName: 'BenchmarkDotNet.Artifacts'
-      publishLocation: 'Container'
+jobs:
+  - job: run
+    pool:
+      name: Hosted Windows 2019 with VS2019
+    timeoutInMinutes: 120
+    steps:
+      - task: UseDotNet@2
+        inputs:
+          packageType: 'sdk'
+          version: '3.0.x'
+      - task: MSBuild@1
+        inputs:
+          solution: 'SkiaSharpBenchmarks.sln'
+          configuration: 'Release'
+          msbuildArguments: '/restore'
+      - script: SkiaSharpBenchmarks\bin\Release\netcoreapp3.0\SkiaSharpBenchmarks.exe
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: 'BenchmarkDotNet.Artifacts'
+          artifactName: 'BenchmarkDotNet.Artifacts'
+          publishLocation: 'Container'
