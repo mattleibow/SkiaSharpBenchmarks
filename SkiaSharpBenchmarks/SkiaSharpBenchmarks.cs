@@ -6,7 +6,7 @@ using SkiaSharp;
 namespace SkiaSharpBenchmarks
 {
 	[SimpleJob(RuntimeMoniker.Net472, baseline: true)]
-	[SimpleJob(RuntimeMoniker.NetCoreApp30)]
+	// [SimpleJob(RuntimeMoniker.NetCoreApp30)]
 	public class SkiaSharpBenchmarks
 	{
 		private SKBitmap bitmap;
@@ -16,10 +16,10 @@ namespace SkiaSharpBenchmarks
 		private SKCanvas canvas;
 		private SKPaint paint;
 
-		[Params(1000, 10000)]
+		[Params(1000)]
 		public int N;
 
-		[Params(0, 90, 180, 270, 360, 20, 45)]
+		[Params(0, 90, 180, 20)]
 		public int Rotation;
 
 		[Params(

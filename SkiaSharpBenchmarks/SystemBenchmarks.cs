@@ -9,17 +9,17 @@ using BenchmarkDotNet.Jobs;
 namespace SkiaSharpBenchmarks
 {
 	[SimpleJob(RuntimeMoniker.Net472, baseline: true)]
-	[SimpleJob(RuntimeMoniker.NetCoreApp30)]
+	// [SimpleJob(RuntimeMoniker.NetCoreApp30)]
 	public class SystemBenchmarks
 	{
 		private Bitmap bitmap;
 		private Bitmap surface;
 		private Graphics canvas;
 
-		[Params(1000, 10000)]
+		[Params(1000)]
 		public int N;
 
-		[Params(0, 90, 180, 270, 360, 20, 45)]
+		[Params(0, 90, 180, 20)]
 		public int Rotation;
 
 		[Params(

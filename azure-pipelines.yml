@@ -5,6 +5,8 @@ trigger:
 pool:
   name: Hosted Windows 2019 with VS2019
 
+timeoutInMinutes: 120
+
 steps:
   - task: UseDotNet@2
     inputs:
