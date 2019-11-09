@@ -2,20 +2,12 @@
 trigger:
   - master
 
-strategy:
-  matrix:
-    macos:
-      imageName: Hosted macOS
-    windows:
-      imageName: Hosted Windows 2019 with VS2019
-
 pool:
-  name: $(imageName)
+  name: Hosted Windows 2019 with VS2019
 
 steps:
-  - bash: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_4_0
-    condition: eq(variables['System.JobName'], 'macos')
   - task: UseDotNet@2
     inputs:
       version: 3.0.x
-  - script: dotnet run -c Release -p SkiaSharpBenchmarks
+  - script: msbuild /r /v:m /p:Configuration=Release
+  - script: SkiaSharpBenchmarks\bin\Release\netcoreapp3.0\SkiaSharpBenchmarks.exe
