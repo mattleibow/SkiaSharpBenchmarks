@@ -1,12 +1,9 @@
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
 
 namespace SkiaSharpBenchmarks
 {
 	public class Program
 	{
-		public static void Main(string[] args)
-		{
-			var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
-		}
+		public static void Main(string[] args) => BenchmarkRunner.Run(typeof(Program).Assembly);
 	}
 }

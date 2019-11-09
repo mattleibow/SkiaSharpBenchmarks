@@ -1,15 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <OutputType>WinExe</OutputType>
-    <LibraryVersion Condition="'$(LIBRARY_VERSION)' != ''">$(LIBRARY_VERSION)</LibraryVersion>
+    <TargetFrameworks>net472;netcoreapp3.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.11.3" />
-    <Reference Include="..\libraries\$(LIBRARY_VERSION)\SkiaSharp.dll" />
-    <None Include="..\libraries\libSkiaSharp.dylib" CopyToOutputDirectory="Always" />
+    <Reference Include="System.Net.Http" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
+    <PackageReference Include="System.Memory" Version="4.5.3" />
+    <PackageReference Include="System.Drawing.Common" Version="4.6.0" Condition="'$(TargetFramework)'=='netcoreapp3.0'" />
+    <Reference Include="..\libraries\SkiaSharp.dll" />
+    <None Include="..\libraries\libSkiaSharp.dll" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>

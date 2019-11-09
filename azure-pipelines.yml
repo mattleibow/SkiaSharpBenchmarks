@@ -2,18 +2,15 @@
 trigger:
   - master
 
-jobs:
-  - job: new_library
-    pool:
-      vmImage: macos-10.13
-    steps:
-      - script: dotnet run -c Release -p SkiaSharpBenchmarks
-        env:
-          LIBRARY_VERSION: 'new'
-  - job: old_library
-    pool:
-      vmImage: macos-10.13
-    steps:
-      - script: dotnet run -c Release -p SkiaSharpBenchmarks
-        env:
-          LIBRARY_VERSION: 'old'
+strategy:
+  matrix:
+    macos:
+      imageName: Hosted macOS
+    windows:
+      imageName: Hosted Windows 2019 with VS2019
+
+pool:
+  name: $(imageName)
+
+steps:
+  - script: dotnet run -c Release -p SkiaSharpBenchmarks
