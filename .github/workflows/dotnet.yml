@@ -21,6 +21,9 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - run: |
+        cd SkiaSharp
+        dotnet cake --target=externals-download
+    - run: |
         cd SkiaSharp/benchmarks/SkiaSharp.Benchmarks
         dotnet run -c Release -f net6.0
     - uses: actions/upload-artifact@v3
