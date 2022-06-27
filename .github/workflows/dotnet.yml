@@ -22,6 +22,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - run: |
         cd SkiaSharp
+        dotnet tool restore
         dotnet cake --target=externals-download
     - run: |
         cd SkiaSharp/benchmarks/SkiaSharp.Benchmarks
