@@ -1,4 +1,4 @@
-name: .NET
+name: Run Benchmarks
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  run:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
