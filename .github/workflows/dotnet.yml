@@ -17,6 +17,8 @@ jobs:
     - run: |
         gh repo clone mono/SkiaSharp
         gh pr checkout 2129
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - run: |
         cd benchmarks/SkiaSharp.Benchmarks
         dotnet run -c Release -f net6.0
